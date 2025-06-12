@@ -12,10 +12,10 @@ public class CarService {
     }
 
     public Car[] addCar(String brand, int id, double price, String model) {
-        if (carRepository.getCarcounter() >= ShopConfiguration.MAXAUTO){
+      /*  if (carRepository.getCarcounter() >= ShopConfiguration.MAXAUTO){
             System.out.println("Магазин заполнен");
             return null;
-        }
+        }*/
         if (carRepository.findById(id) != null) {
             System.out.println("Машина с таким ID уже существует!");
             return null;
@@ -46,5 +46,8 @@ public class CarService {
 
     public Car[] findCarsByPrice(double minPrice, double maxPrice) {
         return carRepository.findCarsByPrice(minPrice, maxPrice);
+    }
+    public CarRepository getCarRepository() {
+        return carRepository;
     }
 }

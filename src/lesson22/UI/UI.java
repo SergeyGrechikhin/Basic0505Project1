@@ -1,5 +1,6 @@
 package lesson22.UI;
 
+import lesson22.ShopConfiguration;
 import lesson22.entity.Car;
 import lesson22.service.CarService;
 
@@ -17,28 +18,40 @@ public class UI {
         System.out.println("Введите сколько машин вы хотите добавить в базу данных");
         int carscounter = input.nextInt();
         input.nextLine();
+        if (carscounter > ShopConfiguration.MAXAUTO) {
+            System.out.println("Вы не можете добавить столько машин . Превышает общее количество свободных мест");
+        }else {
+            for (int i = 0; i < carscounter; i++) {
+                int count = carService.getCarRepository().getCarcounter();
+                int maxcount = ShopConfiguration.MAXAUTO;
+                int freecount = maxcount - count;
+                if (freecount <=0) {
+                    System.out.println("Хранилище полностью заполнено!");
+                    break;
+                }
+                System.out.println("Свободные места в магазине " +  freecount);
+                System.out.println("Введите название бренда");
+                String brand = input.nextLine();
+                System.out.println("Введите название модели");
+                String model = input.nextLine();
+                System.out.println("Введите ID машины/OnlyINT");
+                int id = input.nextInt();
+                input.nextLine();
+                System.out.println("Введите цену машины/OnlyDouble");
+                double price = input.nextDouble();
+                input.nextLine();
 
-        for (int i = 0; i < carscounter; i++) {
-            System.out.println("Введите название бренда");
-            String brand = input.nextLine();
-            System.out.println("Введите название модели");
-            String model = input.nextLine();
-            System.out.println("Введите ID машины/OnlyINT");
-            int id = input.nextInt();
-            input.nextLine();
-            System.out.println("Введите цену машины/OnlyDouble");
-            double price = input.nextDouble();
-            input.nextLine();
 
+                Car[] savedcar = carService.addCar(brand, id, price, model);
+                if(savedcar != null){
+                    System.out.println("Машина добавлена " );
+                } else  {
+                    System.out.println("Машину добавить не получилось");
+                }
 
-            Car[] savedcar = carService.addCar(brand, id, price, model);
-            if(savedcar != null){
-                System.out.println("Машина добавлена " );
-            } else  {
-                System.out.println("Машину добавить не получилось");
             }
-
         }
+
 
     }
 
@@ -97,7 +110,7 @@ public class UI {
             if (cars[i] == null) {
                 return;
             }
-            System.out.println( " \n---- " + "\nБренд Машины : " + cars[i].getBrand() + "  " + "\nМодель машины : " + cars[i].getModel() + "\nID : " + cars[i].getId() + "\nЦена машины" + cars[i].getPrice());
+            System.out.println( " \n---- " + "\nБренд Машины : " + cars[i].getBrand() + "  " + "\nМодель машины : " + cars[i].getModel() + "\nID : " + cars[i].getId() + "\nЦена машины " + cars[i].getPrice() + "Euro");
         }
     }
 
