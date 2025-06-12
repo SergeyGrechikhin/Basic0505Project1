@@ -125,7 +125,7 @@ public class UI {
     public void userMenu(){
         while(true){
             System.out.println(" ===*Menu*=== ");
-            System.out.println("1. Добавить машину/машины в библиотеку.");
+            System.out.println("1. Добавить машину/машины в базу данных.");
             System.out.println("2. Найти машину в базе данных ");
             System.out.println("3. Вывести все машины в базе данных.");
             System.out.println("0. Выйти из программы.");
