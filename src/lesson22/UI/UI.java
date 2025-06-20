@@ -10,6 +10,7 @@ public class UI {
     private CarService carService;
     Scanner input = new Scanner(System.in);
 
+
     public UI(CarService carService) {
         this.carService = carService;
     }
@@ -18,14 +19,17 @@ public class UI {
         System.out.println("Введите сколько машин вы хотите добавить в базу данных");
         int carscounter = input.nextInt();
         input.nextLine();
-        if (carscounter > ShopConfiguration.MAXAUTO) {
+        int count = carService.getCarRepository().getCarcounter();
+        int maxcount = carService.getRepository().getMaxCapacity();
+        int freecount = maxcount - count;
+
+        if (carscounter > freecount) {
             System.out.println("Вы не можете добавить столько машин . Превышает общее количество свободных мест");
+            System.out.println("Максимум склада : " + freecount);
         }else {
             for (int i = 0; i < carscounter; i++) {
-                int count = carService.getCarRepository().getCarcounter();
-                int maxcount = ShopConfiguration.MAXAUTO;
-                int freecount = maxcount - count;
-                if (freecount <=0) {
+
+                if (freecount <= 0) {
                     System.out.println("Хранилище полностью заполнено!");
                     break;
                 }

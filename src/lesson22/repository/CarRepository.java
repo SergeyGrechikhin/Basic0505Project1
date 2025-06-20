@@ -102,6 +102,11 @@ public class CarRepository {
                 return result;
     }
 
+    public int getMaxCapacity(){
+        return cars.length;
+    }
+
+
 
 
 }

@@ -50,4 +50,7 @@ public class CarService {
     public CarRepository getCarRepository() {
         return carRepository;
     }
+    public CarRepository getRepository() {
+        return carRepository;
+    }
 }
