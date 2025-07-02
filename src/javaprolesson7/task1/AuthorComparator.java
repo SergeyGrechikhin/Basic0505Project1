@@ -1,4 +1,4 @@
-package javaprolesson7;
+package javaprolesson7.task1;
 
 import java.util.Comparator;
 

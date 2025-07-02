@@ -1,8 +1,4 @@
-package javaprolesson7;
-
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.Objects;
+package javaprolesson7.task1;
 
 public class Book implements Comparable<Book> {
    private String bookName;
