@@ -23,5 +23,11 @@ public class EmployeeDemo {
         System.out.println("Sort by Department and Name");
         employees.sort(new DepartmentNameComparator());
         employees.forEach(System.out::println);
+        System.out.println("Sort only by Department ");
+        employees.sort(new DepartmentComparator());
+        employees.forEach(System.out::println);
+        System.out.println("Sort only by Name");
+        employees.sort(new NameComparator());
+        employees.forEach(System.out::println);
     }
 }
