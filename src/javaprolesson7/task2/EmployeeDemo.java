@@ -20,7 +20,7 @@ public class EmployeeDemo {
         System.out.println("Sort by salary");
         employees.sort(new SalaryComparator());
         employees.forEach(System.out::println);
-        System.out.println("Sort by Name and Department");
+        System.out.println("Sort by Department and Name");
         employees.sort(new DepartmentNameComparator());
         employees.forEach(System.out::println);
     }
