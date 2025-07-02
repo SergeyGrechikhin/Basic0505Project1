@@ -18,7 +18,7 @@ public class BookDemo {
         System.out.println("Collection sort by Author");
         books.sort(new AuthorComparator());
         books.forEach(System.out::println);
-        System.out.println("Collection sort by name");
+        System.out.println("Collection sort by  Year");
         books.sort(new YearComporator());
         books.forEach(System.out::println);
 
