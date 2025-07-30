@@ -102,6 +102,13 @@ public class LibraryUI {
         printInfoResponse(authorService.findAuthorByName(name));
     }
 
+    private void findBookBzTitleWithAuthor(){
+        System.out.println("Enter book title : ");
+        String title = scanner.nextLine();
+        ResponceDTO<?> responce = authorService.findBookByTitlewithAuthor(title);
+        System.out.println(responce.getMessage());
+    }
+
     public void menu(){
         while (true) {
             System.out.println("===*Menu*===");
@@ -111,6 +118,7 @@ public class LibraryUI {
             System.out.println("4.Find book by author by name");
             System.out.println("5.Find book by isbn");
             System.out.println("6.Book to Author");
+            System.out.println("7.Find Book with Author");
             System.out.println("0.Выход");
             String choice = scanner.nextLine();
             switch (choice) {
@@ -120,6 +128,7 @@ public class LibraryUI {
                 case "4" -> searchAuthorbyName();
                 case "5" -> searchBookByIsbn();
                 case "6" -> bookToAuthors();
+                case "7" -> findBookBzTitleWithAuthor();
                 case "0" ->{
                     System.out.println("Exit");
                     System.exit(0);

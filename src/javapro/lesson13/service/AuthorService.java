@@ -61,5 +61,17 @@ public class AuthorService {
         return ResponceDTO.requestTrue(authors,"Author found successfully");
     }
 
+    public ResponceDTO<String> findBookByTitlewithAuthor(String bookTitle) {
+        for(Author author : authorRepository.findAll()){
+            for(Book book : author.getBooks()){
+                if(book.getTitle().equalsIgnoreCase(bookTitle)){
+                    return ResponceDTO.requestTrue(book.getTitle(),"Book found successfully" +  " Book title " + book.getTitle() + " Author Name " + author.getAuthorName());
+                }
+            }
+        }
+        return ResponceDTO.requestFalse(null,"Book not found");
+    }
+
+
 
 }
