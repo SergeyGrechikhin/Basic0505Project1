@@ -115,7 +115,7 @@ public class LibraryUI {
             System.out.println("1.Create Book");
             System.out.println("2.Create Author");
             System.out.println("3.Find book by title");
-            System.out.println("4.Find book by author by name");
+            System.out.println("4.Find book by author  name");
             System.out.println("5.Find book by isbn");
             System.out.println("6.Book to Author");
             System.out.println("7.Find Book with Author");
