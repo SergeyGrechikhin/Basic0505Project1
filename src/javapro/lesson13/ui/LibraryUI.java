@@ -25,9 +25,10 @@ public class LibraryUI {
         String title = scanner.nextLine();
         System.out.println("Enter your description :");
         String description = scanner.nextLine();
-
         ResponceDTO<?> responce = bookService.create(isbn,description,title);
         System.out.println(responce.getMessage());
+        bookToAuthors();
+
     }
 
     private void createAuthors (){
@@ -42,12 +43,20 @@ public class LibraryUI {
     }
 
     private void bookToAuthors (){
-        System.out.println("Enter your  book isbn :");
-        String isbn = scanner.nextLine();
-        System.out.println("Enter your  Author id :");
-        String autId = scanner.nextLine();
-        ResponceDTO<?> responce = authorService.addBookToAuthor(isbn,autId);
-        System.out.println(responce.getMessage());
+       List<Author> authors = authorService.getAllAuthors();
+       if (authors == null || authors.isEmpty()){
+           System.out.println("You need to assighn the book to an author , but no authors exist yet");
+           createAuthors();
+       }
+       if (authors != null || !authors.isEmpty()){
+           System.out.println("Add Book to Author");
+           System.out.println("Enter your  book isbn :");
+           String isbn = scanner.nextLine();
+           System.out.println("Enter your  Author id :");
+           String autId = scanner.nextLine();
+           ResponceDTO<?> responce = authorService.addBookToAuthor(isbn,autId);
+           System.out.println(responce.getMessage());
+       }
     }
 
     private void showBook () {
