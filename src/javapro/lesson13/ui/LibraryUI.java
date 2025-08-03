@@ -6,6 +6,7 @@ import javapro.lesson13.entity.Book;
 import javapro.lesson13.service.AuthorService;
 import javapro.lesson13.service.BookService;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +28,42 @@ public class LibraryUI {
         String description = scanner.nextLine();
         ResponceDTO<?> responce = bookService.create(isbn,description,title);
         System.out.println(responce.getMessage());
-        bookToAuthors();
+        if (!responce.isSuccess()) return;
+        while(true){
+            System.out.println("Enter Author ID to attach the book : ");
+            String authorId = scanner.nextLine();
+            ResponceDTO<?> attachResponce = authorService.addBookToAuthor(isbn,authorId);
+            if (attachResponce.isSuccess()) {
+                System.out.println(attachResponce.getMessage());
+                break;
+            } else  {
+                boolean cancel = authorsNotFound();
+                if (cancel) {
+                    System.out.println("Operation cancelled");
+                    break;
+                }
+            }
+        }
+
+    }
+
+    private boolean authorsNotFound (){
+        while(true){
+            System.out.println("Authors not found");
+            System.out.println("1.Enter your author id again.");
+            System.out.println("2.Show all authors");
+            System.out.println("3.Create new author");
+            String choice = scanner.nextLine();
+            switch (choice){
+                case "1" -> {
+                    return false ;
+                }
+                case "2" -> showAuthors();
+                case "3" -> createAuthors();
+                default -> System.out.println("Wrong choice");
+
+            }
+        }
 
     }
 
@@ -42,7 +78,7 @@ public class LibraryUI {
         System.out.println(responce.getMessage());
     }
 
-    private void bookToAuthors (){
+  /* private void bookToAuthors (){
        List<Author> authors = authorService.getAllAuthors();
        if (authors == null || authors.isEmpty()){
            System.out.println("You need to assighn the book to an author , but no authors exist yet");
@@ -57,7 +93,9 @@ public class LibraryUI {
            ResponceDTO<?> responce = authorService.addBookToAuthor(isbn,autId);
            System.out.println(responce.getMessage());
        }
-    }
+    } */
+
+
 
     private void showBook () {
         List<Book> books = bookService.findAll();
@@ -126,7 +164,7 @@ public class LibraryUI {
             System.out.println("3.Find book by title");
             System.out.println("4.Find book by author  name");
             System.out.println("5.Find book by isbn");
-            System.out.println("6.Book to Author");
+
             System.out.println("7.Find Book with Author");
             System.out.println("0.Выход");
             String choice = scanner.nextLine();
@@ -136,7 +174,6 @@ public class LibraryUI {
                 case "3" -> searchBookByTitle();
                 case "4" -> searchAuthorbyName();
                 case "5" -> searchBookByIsbn();
-                case "6" -> bookToAuthors();
                 case "7" -> findBookBzTitleWithAuthor();
                 case "0" ->{
                     System.out.println("Exit");

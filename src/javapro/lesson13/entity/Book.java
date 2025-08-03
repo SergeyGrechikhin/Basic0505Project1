@@ -1,5 +1,7 @@
 package javapro.lesson13.entity;
 
+import java.util.Objects;
+
 public class Book {
     private String isbn ;
     private String title;
@@ -36,7 +38,18 @@ public class Book {
         this.title = title;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(isbn, book.isbn);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
+    }
 
     @Override
     public String toString() {

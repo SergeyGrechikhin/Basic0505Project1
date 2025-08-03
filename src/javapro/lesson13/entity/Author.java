@@ -16,6 +16,7 @@ public class Author {
         this.authorName = authorName;
     }
     public void addBook(Book book) {
+        if(!books.contains(book))
         books.add(book);
     }
 
